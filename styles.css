@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background: #0044cc;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+}
+header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+header button {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background: white;
+    color: #0044cc;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#map {
+    height: 70vh;
+    margin: 20px auto;
+    width: 95%;
+    border-radius: 10px;
+}
+#addSignalButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
