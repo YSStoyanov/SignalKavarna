@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сигнална система - Община Каварна</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Хедър секция -->
+    <header>
+        <h1>Сигнална система - Община Каварна</h1>
+        <button id="adminPanelButton">Администраторски панел</button>
+    </header>
+
+    <!-- Основно съдържание -->
+    <main>
+        <!-- Картата -->
+        <div id="map"></div>
+        <button id="addSignalButton" title="Добави сигнал">+</button>
+
+        <!-- Форма за добавяне на сигнал -->
+        <form id="signalForm" style="display:none;">
+            <h2>Добавяне на сигнал</h2>
+            <label for="location">Местоположение:</label>
+            <input type="text" id="location" placeholder="Изберете местоположение" readonly>
+            <button type="button" id="manualLocation">Ръчно местоположение</button>
+            <button type="button" id="detectLocation">Текущо местоположение</button>
+
+            <label for="description">Описание:</label>
+            <textarea id="description" placeholder="Опишете проблема"></textarea>
+
+            <label for="images">Прикачване на снимки:</label>
+            <input type="file" id="images" accept="image/*" multiple>
+
+            <label for="contact">Контакти:</label>
+            <input type="text" id="contact" placeholder="Телефон или имейл">
+
+            <!-- Бутоните за изпращане и отказ -->
+            <div>
+                <button type="submit">Изпрати сигнал</button>
+                <button type="button" id="cancelFormButton">Отказ</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Скрити съобщения -->
+    <div id="adminPanelMessage" style="display:none;">
+        <p>Функционалността на административния панел е в разработка.</p>
+        <button onclick="this.parentElement.style.display='none';">Затвори</button>
+    </div>
+
+    <!-- Включване на JavaScript библиотеки -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="app.js" defer></script>
+</body>
+</html>

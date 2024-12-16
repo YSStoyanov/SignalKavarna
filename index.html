@@ -1,37 +1,32 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сигнална система - Община Каварна</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Сигнална система - Община Каварна</h1>
-        <button id="adminPanelButton">Администраторски панел</button>
-    </header>
-    <main>
-        <div id="map"></div>
-        <button id="addSignalButton" title="Добави сигнал">+</button>
-        <form id="signalForm" style="display:none;">
-            <h2>Добавяне на сигнал</h2>
-            <label for="location">Местоположение:</label>
-            <input type="text" id="location" placeholder="Изберете местоположение" readonly>
-            <button type="button" id="manualLocation">Ръчно местоположение</button>
-            <button type="button" id="detectLocation">Текущо местоположение</button>
-            <label for="description">Описание:</label>
-            <textarea id="description" placeholder="Опишете проблема"></textarea>
-            <label for="images">Прикачване на снимки:</label>
-            <input type="file" id="images" accept="image/*" multiple>
-            <label for="contact">Контакти:</label>
-            <input type="text" id="contact" placeholder="Телефон или имейл">
-            <button type="submit">Изпрати сигнал</button>
-            <button type="button" id="cancelFormButton">Отказ</button>
-        </form>
-    </main>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="app.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang='bg'><head><title>Подай сигнал</title></head><body>
+<form id="signalForm" action="/submit-signal" method="POST">
+    <label for="name">Име на сигнал:</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="description">Описание:</label>
+    <textarea id="description" name="description" required></textarea><br>
+    <label for="location">Координати (например 42.7, 23.3):</label>
+    <input type="text" id="location" name="location" required><br>
+    <button type="submit">Изпрати</button>
+</form>
+<div id='map' style='height: 500px;'></div>
+<div id="map" style="height: 500px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    const map = L.map('map').setView([42.6977, 23.3219], 10); // Център на картата
+
+    // Добавяне на плочки от OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Зареждане на маркери от сървъра
+    fetch('/signals').then(response => response.json()).then(signals => {
+        signals.forEach(signal => {
+            L.marker([signal.lat, signal.lng]).addTo(map)
+             .bindPopup(`<b>${signal.name}</b><br>${signal.description}`);
+        });
+    });
+</script>
+</body></html>

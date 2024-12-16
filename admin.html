@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ Панел</title>
+    <script>
+        async function fetchSignals() {
+            const response = await fetch('/signals');
+            const signals = await response.json();
+            document.getElementById('signals').innerHTML = signals.map(s => 
+                `<li>${s.name} - ${s.description} (${s.lat}, ${s.lng})</li>`).join('');
+        }
+    </script>
+</head>
+<body onload="fetchSignals()">
+    <h1>Добре дошли в Админ Панела</h1>
+    <ul id="signals">Зареждане...</ul>
+</body>
+</html>
